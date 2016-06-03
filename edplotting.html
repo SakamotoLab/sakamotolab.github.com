@@ -14,6 +14,9 @@
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     
     <script type="text/javascript">
+        var shipMaxJump = 33;
+        var travelDistance = 1000;
+        var sgraDistance = 2000;
     	
         $(function() {
             
@@ -21,7 +24,18 @@
             
         });
 
-        
+        function calculate() {
+            shipMaxJump = parseFloat($('#ship-max-jump').value);
+            travelDistance = parseFloat($('#travel-distance').value);
+            sgraDistance = parseFloat($('#sgra-distance').value);
+
+            var jumpTimes = Math.floor(travelDistance/shipMaxJump);
+            var idealTravelDistance = shipMaxJump*jumpTimes;
+
+            var targetDistance = Math.round((idealTravelDistance - (jumpTimes/4 + sgraDistance/1000*2))*100)/100;
+
+            $('#result').text('建议导航距离:'+targetDistance+'LY');
+        }
 
     </script>
     
@@ -33,5 +47,28 @@
 </head>
 
 <body>
-    
-</body></html>
+    <div class="container">
+        <div class="form-group">
+            <label for="ship-max-jump">飞船最大跳跃距离</label>
+            <input type="number" class="form-control" id="ship-max-jump" placeholder="单位LY" value="33">
+        </div>
+
+        <div class="form-group">
+            <label for="travel-distance">目标星系距离</label>
+            <input type="number" class="form-control" id="travel-distance" placeholder="单位LY" value="1000">
+        </div>
+
+        <div class="form-group">
+            <label for="sgra-distance">当前位置和SAGITTARIUS A的距离</label>
+            <input type="number" class="form-control" id="sgra-distance" placeholder="单位LY" value="2000">
+        </div>
+
+        <button type="button" class="btn btn-primary" onclick="calculate();">计算</button>
+
+        <br>
+
+        <h4 id="result"></h4>
+    </div>
+
+</body>
+</html>
