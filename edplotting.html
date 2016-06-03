@@ -25,9 +25,9 @@
         });
 
         function calculate() {
-            shipMaxJump = parseFloat($('#ship-max-jump').value);
-            travelDistance = parseFloat($('#travel-distance').value);
-            sgraDistance = parseFloat($('#sgra-distance').value);
+            shipMaxJump = parseFloat($('#ship-max-jump').val());
+            travelDistance = parseFloat($('#travel-distance').val());
+            sgraDistance = parseFloat($('#sgra-distance').val());
 
             var jumpTimes = Math.floor(travelDistance/shipMaxJump);
             var idealTravelDistance = shipMaxJump*jumpTimes;
