@@ -40,7 +40,9 @@
     </script>
     
     <style type="text/css">
-    
+        #calculate-button {
+            margin: 0px auto 0px auto;
+        }
 
     </style>
 
@@ -66,11 +68,14 @@
             <input type="number" class="form-control" id="sgra-distance" placeholder="单位LY" value="2000">
         </div>
 
-        <button type="button" class="btn btn-primary" onclick="calculate();">计算</button>
+        <button type="button" id="calculate-button" class="btn btn-primary btn-lg" onclick="calculate();">计算</button>
 
         <br>
 
-        <h4 id="result"></h4>
+        <div style="text-align:center;">
+            <h4 id="result"></h4>
+        </div>
+
         <br>
 
         <div><a href="https://forums.frontier.co.uk/showthread.php?t=151389" target="_blank">算法来源</a></div>
