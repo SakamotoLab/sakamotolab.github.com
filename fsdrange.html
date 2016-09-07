@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no width=device-width initial-scale=1.0 maximum-scale=1.0">
+    <title>FSD距离计算</title>
+    
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript">
+        var optimisedMass = 560;
+        var maxFuelPerJump = 5;
+        var shipMass = 400;
+        var fsdClass = 5;
+        var fsdRating = "A";
+
+        var classConstants = 2.45;
+        var ratingConstants = 12;
+    	
+        $(function() {
+            
+
+            
+        });
+
+        function calculate() {
+            optimisedMass = parseFloat($('#optimised-mass').val());
+            maxFuelPerJump = parseFloat($('#max-fuel-per-jump').val());
+            shipMass = parseFloat($('#ship-mass').val());
+
+            fsdClass = parseFloat($("#fsd-class").find("option:selected").text());
+            fsdRating = $("#fsd-rating").find("option:selected").text();
+
+            classConstants = parseFloat($("#fsd-class").val());
+            ratingConstants = parseFloat($("#fsd-rating").val());
+
+            var jumpRange = Math.round((optimisedMass/shipMass)*Math.pow(1000*maxFuelPerJump/ratingConstants,1/classConstants)*100)/100;
+
+            $('#result').text('当前FSD最大距离: '+jumpRange+'LY');
+        }
+
+    </script>
+    
+    <style type="text/css">
+        #calculate-button {
+            display: block;
+            width: 40%;
+            margin: 0px auto 0px auto;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>Elite Dangerous FSD最大跃迁距离计算</h1>
+        </div>
+        <div class="form-group">
+            <label for="optimised-mass">FSD的Optimised Mass(T)</label>
+            <input type="number" class="form-control" id="optimised-mass" placeholder="单位T" value="560">
+        </div>
+
+        <div class="form-group">
+            <label for="max-fuel-per-jump">单跳最大油耗(T)</label>
+            <input type="number" class="form-control" id="max-fuel-per-jump" placeholder="单位T" value="5">
+        </div>
+
+        <div class="form-group">
+            <label for="ship-mass">飞船总质量(T)</label>
+            <input type="number" class="form-control" id="ship-mass" placeholder="单位T" value="400">
+        </div>
+
+        <div class="form-group">
+            <label for="fsd-class">FSD Class</label>
+            <select class="form-control" id="fsd-class">
+                <option value="2">2</option>
+                <option value="2.15">3</option>
+                <option value="2.3">4</option>
+                <option value="2.45" selected="selected">5</option>
+                <option value="2.6">6</option>
+                <option value="2.75">7</option>
+                <option value="2.9">8</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="fsd-rating">FSD Rating</label>
+            <select class="form-control" id="fsd-rating">
+                <option value="12" selected="selected">A</option>
+                <option value="10">B</option>
+                <option value="8">C</option>
+                <option value="10">D</option>
+                <option value="11">E</option>
+            </select>
+        </div>
+
+        <br>
+
+        <button type="button" id="calculate-button" class="btn btn-primary btn-lg" onclick="calculate();">计算</button>
+
+        <br>
+
+        <div style="text-align:center;">
+            <h4 id="result"></h4>
+        </div>
+
+        <br>
+
+        <div style="text-align:center;"><a href="https://www.reddit.com/r/EliteDangerous/comments/51gfku/how_to_calculate_max_jump_range_with_engineer_mods/" target="_blank">算法来源</a></div>
+    </div>
+
+</body>
+</html>
